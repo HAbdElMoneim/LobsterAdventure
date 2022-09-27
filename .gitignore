@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/LobsterAdventure/bin/Debug/net6.0
+/LobsterAdventure.Caching/bin/Debug/net6.0
+/LobsterAdventure.Caching/obj
+/LobsterAdventure.Core/bin/Debug/net6.0
+/LobsterAdventure.Core/obj
+/LobsterAdventure/obj
+/LobsterAdventure/.vs/LobsterAdventure
