@@ -9,3 +9,7 @@
 /LobsterAdventure.Core/obj
 /LobsterAdventure/obj
 /LobsterAdventure/.vs/LobsterAdventure
+/.vs
+/LobsterAdventure.Api/bin/Debug/net6.0
+/LobsterAdventure.Api/obj
+/LobsterAdventure.Api/.vs/LobsterAdventure
