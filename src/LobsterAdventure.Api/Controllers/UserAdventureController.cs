@@ -9,38 +9,43 @@ namespace LobsterAdventure.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AdventureController : ControllerBase
+    public class UserAdventureController : ControllerBase
     {
-        private readonly IAdventureService _adventureService;
-        private readonly ILogger<AdventureController> _logger;
+        private readonly IUserAdventureService _userAdventureService;
+        private readonly ILogger<UserAdventureController> _logger;
 
-        public AdventureController(IAdventureService adventureService, ILogger<AdventureController> logger)
+        public UserAdventureController(IUserAdventureService userAdventureService, ILogger<UserAdventureController> logger)
         {
-            _adventureService = adventureService;
+            _userAdventureService = userAdventureService;
             _logger = logger;
         }
 
         /// <summary>
-        /// Endpoint to Create Adventure
+        /// Endpoint to start new user adventure
         /// </summary>
-        /// <param name="adventureArray"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns>bool</returns>
+        /// <returns>First step in the adventure</returns>
         [Authorize]
-        [HttpPost, Route("CreateNew")]
+        [HttpGet, Route("start-adventure")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> CreateAdventure(string?[] adventureArray, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<AdventureTreeNode>> StartNewAdventure(CancellationToken cancellationToken = default)
         {
             try
             {
-                if (adventureArray.Length <= 0)
+                var userId = GetUser();
+                if (string.IsNullOrEmpty(userId))
                 {
                     _logger.UnUnauthorizedUser();
-                    return BadRequest("adventure must contains some steps.");
+                    return Unauthorized("Unauthorized User.");
                 }
 
-                var result = await _adventureService.AddNewAdventure(adventureArray, cancellationToken);
+                var result = await _userAdventureService.CreateUserAdventure(userId, cancellationToken);
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
 
                 return Ok(result);
             }
@@ -52,34 +57,39 @@ namespace LobsterAdventure.Controllers
         }
 
         /// <summary>
-        /// Endpoint to get AdventureSteps
+        /// Endpoint to get user next step.
         /// </summary>
         /// <param name="nodeId"></param>
         /// <param name="CancellationToken"></param>
-        /// <returns>List of shows including list of casts for each show</returns>
+        /// <returns>Next adventure step.</returns>
         [Authorize]
-        [HttpGet, Route("UserSteps")]
+        [HttpGet, Route("next-step")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-        public async Task<ActionResult<AdventureTreeNode>> GetUserAdventureSteps([FromQuery] int nodeId, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<AdventureTreeNode>> GetAdventureNextStep([FromQuery] int nodeId, CancellationToken cancellationToken = default)
         {
             try
             {
-                var userId = User.Claims.ToList().FirstOrDefault(x => x.Type == "UserId").Value;
-
+                var userId = GetUser();
                 if (string.IsNullOrEmpty(userId))
                 {
                     _logger.UnUnauthorizedUser();
                     return Unauthorized("Unauthorized User.");
                 }
 
-                if(nodeId < 0)
+                if(nodeId <= 0)
                 {
                     _logger.InvalidRequest("nodeId", nodeId.ToString());
-                    return BadRequest("Node id must be greater than or equal zero.");
+                    return BadRequest("Node id must be greater than zero.");
                 }
-                var result = await _adventureService.ProcessUserAdventure(nodeId, userId, cancellationToken);
+
+                var result = await _userAdventureService.ProcessUserAdventure(nodeId, userId, cancellationToken);
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
 
                 return Ok(result);
             }
@@ -93,25 +103,29 @@ namespace LobsterAdventure.Controllers
         /// <summary>
         /// Endpoint to get shows User Adventure selections
         /// </summary>
-        /// <returns>Adventure Selected steps</returns>
+        /// <returns>User adventure selected steps</returns>
         [Authorize]
-        [HttpGet, Route("Result")]
+        [HttpGet, Route("adventure-result")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-        public async Task<ActionResult<AdventureTreeNode>> GetUserAdventureResult()
+        public async Task<ActionResult<AdventureTreeNode>> GetAdventureResult(CancellationToken cancellationToken = default)
         {
             try
             {
-                var userId = User.Claims.ToList().FirstOrDefault(x => x.Type == "UserId").Value;
-
+                var userId = GetUser();
                 if (string.IsNullOrEmpty(userId))
                 {
                     _logger.UnUnauthorizedUser();
                     return Unauthorized("Unauthorized User.");
                 }
 
-                var result = await _adventureService.GetUserAdventureResult(userId);
+                var result = await _userAdventureService.GetUserAdventureResult(userId, cancellationToken);
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
 
                 return Ok(result);
             }
@@ -121,5 +135,7 @@ namespace LobsterAdventure.Controllers
                 return NotFound();
             }
         }
+
+        private string GetUser() => User.Claims.ToList().FirstOrDefault(x => x.Type == "UserId").Value;
     }
 }

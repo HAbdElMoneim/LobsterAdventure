@@ -28,9 +28,9 @@ namespace LobsterAdventure.Caching
         /// GetAdventure
         /// </summary>
         /// <returns>AdventureTree</returns>
-        public async Task<AdventureTreeNode?> GetAdventure()
+        public async Task<AdventureTreeNode?> GetAdventure(CancellationToken cancellationToken)
         {
-            var cachedAdventure = await _cache.GetStringAsync(CacheKeysEnum.AdventureArray.ToString());
+            var cachedAdventure = await _cache.GetStringAsync(CacheKeysEnum.AdventureArray.ToString(), cancellationToken);
 
             if (string.IsNullOrWhiteSpace(cachedAdventure))
             {
@@ -53,7 +53,8 @@ namespace LobsterAdventure.Caching
             if (!string.IsNullOrWhiteSpace(cachedAdventure))
             {
                 _logger.AdventureAlreadyCached();
-                return false;
+                await _cache.RemoveAsync(CacheKeysEnum.AdventureArray.ToString(), cancellationToken);
+                _logger.RemoveExistingCachedAdventure();
             }
 
             await _cache.SetStringAsync(CacheKeysEnum.AdventureArray.ToString(), JsonSerializer.Serialize(adventureTree), cancellationToken);
@@ -87,9 +88,9 @@ namespace LobsterAdventure.Caching
         /// GetUserAdventure
         /// </summary>
         /// <returns>UserAdventureTree</returns>
-        public async Task<AdventureTreeNode?> GetUserAdventure(string userId)
+        public async Task<AdventureTreeNode?> GetUserAdventure(string userId, CancellationToken cancellationToken)
         {
-            var cachedUserAdventure = await _cache.GetStringAsync(userId);
+            var cachedUserAdventure = await _cache.GetStringAsync(userId, cancellationToken);
 
             if (string.IsNullOrWhiteSpace(cachedUserAdventure))
             {
@@ -109,7 +110,7 @@ namespace LobsterAdventure.Caching
         /// <returns></returns>
         public async Task<bool> AddUserAdventure(string userId, AdventureTreeNode userAdventureTreeNode, CancellationToken cancellationToken)
         {
-            var cachedUserAdventure = await _cache.GetStringAsync(userId);
+            var cachedUserAdventure = await _cache.GetStringAsync(userId, cancellationToken);
             if(!string.IsNullOrWhiteSpace(cachedUserAdventure))
             {
                 _logger.UserAdventureIsNotAvailable(userId);

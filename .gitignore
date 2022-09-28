@@ -13,3 +13,12 @@
 /LobsterAdventure.Api/bin/Debug/net6.0
 /LobsterAdventure.Api/obj
 /LobsterAdventure.Api/.vs/LobsterAdventure
+/src/LobsterAdventure.Api/.vs/LobsterAdventure
+/src/LobsterAdventure.Api/bin/Debug/net6.0
+/src/LobsterAdventure.Api/obj
+/src/LobsterAdventure.Caching/bin/Debug/net6.0
+/src/LobsterAdventure.Caching/obj
+/src/LobsterAdventure.Core/bin/Debug/net6.0
+/src/LobsterAdventure.Core/obj
+/test/LobsterAdventure.Api.Tests/obj
+/test/LobsterAdventure.Caching.Tests/obj

@@ -14,11 +14,20 @@ namespace LobsterAdventure.Core.Extentions
         public static void AdventureAlreadyCached(this ILogger logger) =>
             logger.LogWarning($"Cache already has an AdventureTree.");
 
+        public static void RemoveExistingCachedAdventure(this ILogger logger) =>
+            logger.LogWarning($"Remove existing cached adventure.");
+
         public static void AdventureTreeIsNotAvailable(this ILogger logger) =>
             logger.LogWarning($"AdventureTree is not yet available.");
 
         public static void AdventureArrayIsNullOrEmpty(this ILogger logger) =>
-            logger.LogWarning($"Adventure array is null or empty.");
+            logger.LogWarning($"Adventure array is null or empty."); 
+        
+        public static void AdventureRootNodeNotFound(this ILogger logger) =>
+            logger.LogWarning($"Could not find Adventure root node.");
+
+        public static void AdventureRootNodeNotSelected(this ILogger logger) =>
+            logger.LogWarning($"Adventure root node is not selected.");
         
         public static void UserSelectedNodeIsNull(this ILogger logger, int nodeId, string userId) =>
             logger.LogWarning($"Could not find node id {nodeId} for user {userId} cached adventure tree.");
@@ -26,8 +35,8 @@ namespace LobsterAdventure.Core.Extentions
         public static void UnableToUpdateUserCachedAdventure(this ILogger logger, string userId) =>
             logger.LogWarning($"Could not update cached adventure for user {userId}.");
 
-        public static void UnableToFindAnyCachedAdventure(this ILogger logger) =>
-           logger.LogWarning($"Could not Find any cached adventure in the system.");
+        public static void UnableToFindAnyCreatedAdventure(this ILogger logger) =>
+           logger.LogWarning($"Could not Find any adventure in the system.");
         
         public static void UnUnauthorizedUser(this ILogger logger) =>
            logger.LogError($"Un authorized request.");

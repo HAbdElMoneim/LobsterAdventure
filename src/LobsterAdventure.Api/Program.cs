@@ -21,6 +21,7 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerDocumentation();
 builder.Services.AddScoped<IAdventureService, AdventureService>();
+builder.Services.AddScoped<IUserAdventureService, UserAdventureService>();
 builder.Services.AddScoped<IAdventureCacheService, AdventureCacheService>();
 builder.Services.AddDistributedMemoryCache();
 
