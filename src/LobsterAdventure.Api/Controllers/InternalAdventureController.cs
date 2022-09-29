@@ -12,9 +12,9 @@ namespace LobsterAdventure.Controllers
     public class InternalAdventureController : ControllerBase
     {
         private readonly IAdventureService _adventureService;
-        private readonly ILogger<UserAdventureController> _logger;
+        private readonly ILogger<InternalAdventureController> _logger;
 
-        public InternalAdventureController(IAdventureService adventureService, ILogger<UserAdventureController> logger)
+        public InternalAdventureController(IAdventureService adventureService, ILogger<InternalAdventureController> logger)
         {
             _adventureService = adventureService;
             _logger = logger;

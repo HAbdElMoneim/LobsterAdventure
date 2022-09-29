@@ -22,3 +22,4 @@
 /src/LobsterAdventure.Core/obj
 /test/LobsterAdventure.Api.Tests/obj
 /test/LobsterAdventure.Caching.Tests/obj
+/test/LobsterAdventure.Api.Tests/bin
