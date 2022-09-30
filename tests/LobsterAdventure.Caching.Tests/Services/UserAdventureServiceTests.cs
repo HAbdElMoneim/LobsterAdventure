@@ -27,24 +27,5 @@ namespace LobsterAdventure.Caching.Tests.Services
 
             _adventureCacheService = new AdventureCacheService(_distributedCacheMock.Object, _loggerMock.Object);
         }
-
-        //[Fact]
-        //internal async Task GivenUseCase_WhenGetAdventureFromController_CachedAdventureTreeIsReturned()
-        //{
-        //    // Arrange
-        //    var mockedResult = new AdventureTreeNode(0, "A", true, new AdventureTreeNode(1, "B"), new AdventureTreeNode(2, "C"));
-        //    _distributedCacheMock.Setup(x => x.GetStringAsync(CacheKeysEnum.AdventureArray.ToString(), default)).ReturnsAsync(JsonSerializer.Serialize(mockedResult));
-
-        //    // Action
-        //    var result = await _adventureCacheService.GetAdventure(default);
-
-        //    // Assert
-        //    Assert.IsType<AdventureTreeNode>(result);
-        //    ((AdventureTreeNode)result).NodeId.Should().Be(0);
-        //    ((AdventureTreeNode)result).LeftChild.NodeId.Should().Be(1);
-        //    ((AdventureTreeNode)result).RightChild.NodeId.Should().Be(2);
-
-        //    _distributedCacheMock.Verify(x => x.GetStringAsync(CacheKeysEnum.AdventureArray.ToString(), default), Times.Exactly(1));
-        //}
     }
 }
