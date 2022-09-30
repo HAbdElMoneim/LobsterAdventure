@@ -1,6 +1,6 @@
 ﻿using LobsterAdventure.Core.Models;
 
-namespace LobsterAdventure.Caching
+namespace LobsterAdventure.Caching.Services
 {
     public interface IAdventureCacheService
     {

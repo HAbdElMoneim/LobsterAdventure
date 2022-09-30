@@ -28,7 +28,8 @@ namespace LobsterAdventure.Controllers
         [Authorize]
         [HttpGet, Route("start-adventure")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         public async Task<ActionResult<AdventureTreeNode>> StartNewAdventure(CancellationToken cancellationToken = default)
         {
             try
@@ -52,7 +53,7 @@ namespace LobsterAdventure.Controllers
             catch (Exception ex)
             {
                 _logger.UnexpectedError(ex);
-                return BadRequest();
+                return NotFound();
             }
         }
 
@@ -66,6 +67,7 @@ namespace LobsterAdventure.Controllers
         [HttpGet, Route("next-step")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         public async Task<ActionResult<AdventureTreeNode>> GetAdventureNextStep([FromQuery] int nodeId, CancellationToken cancellationToken = default)
         {
@@ -101,7 +103,7 @@ namespace LobsterAdventure.Controllers
         }
 
         /// <summary>
-        /// Endpoint to get shows User Adventure selections
+        /// Endpoint to get User Adventure selections
         /// </summary>
         /// <returns>User adventure selected steps</returns>
         [Authorize]

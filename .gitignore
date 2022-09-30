@@ -23,3 +23,7 @@
 /test/LobsterAdventure.Api.Tests/obj
 /test/LobsterAdventure.Caching.Tests/obj
 /test/LobsterAdventure.Api.Tests/bin
+/tests/LobsterAdventure.Api.Tests/bin
+/tests/LobsterAdventure.Api.Tests/obj
+/tests/LobsterAdventure.Caching.Tests/obj
+/tests/LobsterAdventure.Caching.Tests/bin/Debug/net6.0

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 
-namespace LobsterAdventure.Caching
+namespace LobsterAdventure.Caching.Services
 {
     // TODO: need more abstractions layer
     public class AdventureCacheService : IAdventureCacheService

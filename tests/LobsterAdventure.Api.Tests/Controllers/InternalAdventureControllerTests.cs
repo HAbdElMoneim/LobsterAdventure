@@ -83,6 +83,10 @@ namespace LobsterAdventure.Api.Tests.Controllers
 
             // Assert
             Assert.IsType<ActionResult<AdventureTreeNode>>(result);
+            var okObjectResult = (OkObjectResult)result.Result;
+            okObjectResult.Should().NotBeNull();
+            ((AdventureTreeNode)okObjectResult.Value).NodeId.Should().Be(1);
+            ((AdventureTreeNode)okObjectResult.Value).NodeText.Should().Be("test");
         }
 
         [Fact]
@@ -95,12 +99,12 @@ namespace LobsterAdventure.Api.Tests.Controllers
             var result = await _internalController.GetAdventure();
 
             // Assert
-            Assert.IsType<ActionResult<AdventureTreeNode>>(result);
+            Assert.IsType<NotFoundResult>(result.Result);
             result.Value.Should().Be(null);
         }
 
         [Fact]
-        internal async Task GivenUseCase_WhenGetAdventureFromControllerWithUnExpectedException_BadRequestReturned()
+        internal async Task GivenUseCase_WhenGetAdventureFromControllerWithUnExpectedException_NotFoundReturned()
         {
             // Arrange
             _adventureServiceMock.Setup(asm => asm.GetAdventure(default)).Throws(new System.Exception());
@@ -109,7 +113,7 @@ namespace LobsterAdventure.Api.Tests.Controllers
             var result = await _internalController.GetAdventure();
 
             // Assert
-            Assert.IsType<ActionResult<AdventureTreeNode>>(result);
+            Assert.IsType<NotFoundResult>(result.Result);
             _adventureServiceMock.Verify(x => x.GetAdventure(default), Times.Exactly(1));
         }
     }

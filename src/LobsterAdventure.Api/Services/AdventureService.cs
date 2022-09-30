@@ -1,4 +1,4 @@
-﻿using LobsterAdventure.Caching;
+﻿using LobsterAdventure.Caching.Services;
 using LobsterAdventure.Core.Extentions;
 using LobsterAdventure.Core.Models;
 
@@ -45,7 +45,7 @@ namespace LobsterAdventure.Api.Services
         /// GetAdventure
         /// </summary>
         /// <param name="cancellationToken"></param>
-        /// <returns>bool</returns>
+        /// <returns>FullAdventureTree</returns>
         public async Task<AdventureTreeNode?> GetAdventure(CancellationToken cancellationToken)
         {
             var adventureNode = await _adventureCacheService.GetAdventure(cancellationToken);

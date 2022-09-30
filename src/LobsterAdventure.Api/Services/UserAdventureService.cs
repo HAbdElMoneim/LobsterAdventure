@@ -1,4 +1,4 @@
-﻿using LobsterAdventure.Caching;
+﻿using LobsterAdventure.Caching.Services;
 using LobsterAdventure.Core.Extentions;
 using LobsterAdventure.Core.Models;
 
@@ -7,14 +7,14 @@ namespace LobsterAdventure.Api.Services
     public class UserAdventureService : IUserAdventureService
     {
         private readonly IAdventureCacheService _adventureCacheService;
-        private readonly ILogger<AdventureService> _logger;
+        private readonly ILogger<UserAdventureService> _logger;
 
         /// <summary>
         /// AdventureTreeNodeService
         /// </summary>
         /// <param name="adventureCacheService"></param>
         /// <param name="logger"></param>
-        public UserAdventureService(IAdventureCacheService adventureCacheService, ILogger<AdventureService> logger)
+        public UserAdventureService(IAdventureCacheService adventureCacheService, ILogger<UserAdventureService> logger)
         {
             _adventureCacheService = adventureCacheService;
             _logger = logger;

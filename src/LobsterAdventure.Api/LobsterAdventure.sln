@@ -9,11 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LobsterAdventure.Caching", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LobsterAdventure.Core", "..\LobsterAdventure.Core\LobsterAdventure.Core.csproj", "{A535B220-47ED-412C-B963-2EB46BA7C1BB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{97C1C066-FF90-4014-A71D-8D6B4FA5336C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{97C1C066-FF90-4014-A71D-8D6B4FA5336C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LobsterAdventure.Api.Tests", "..\..\test\LobsterAdventure.Api.Tests\LobsterAdventure.Api.Tests.csproj", "{197C7AA3-B394-493B-BA3E-70D274BBA16F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LobsterAdventure.Api.Tests", "..\..\tests\LobsterAdventure.Api.Tests\LobsterAdventure.Api.Tests.csproj", "{197C7AA3-B394-493B-BA3E-70D274BBA16F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LobsterAdventure.Caching.Tests", "..\..\test\LobsterAdventure.Caching.Tests\LobsterAdventure.Caching.Tests.csproj", "{DBB5587F-4400-4E02-9B50-1E5CB951E8D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LobsterAdventure.Caching.Tests", "..\..\tests\LobsterAdventure.Caching.Tests\LobsterAdventure.Caching.Tests.csproj", "{DBB5587F-4400-4E02-9B50-1E5CB951E8D2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9ACB827C-767C-45D1-89AE-72754F5A52FB}"
 EndProject

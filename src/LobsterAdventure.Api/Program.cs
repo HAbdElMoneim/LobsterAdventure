@@ -1,6 +1,6 @@
 using LobsterAdventure.Api.Extensions;
 using LobsterAdventure.Api.Services;
-using LobsterAdventure.Caching;
+using LobsterAdventure.Caching.Services;
 using Newtonsoft.Json.Converters;
 using System.Text.Json.Serialization;
 
